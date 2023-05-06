@@ -1,6 +1,12 @@
 import "./App.css";
 import logo from "./assets/listedDarklogo.svg";
 import illustrationIntro from "./assets/illustration-intro.svg";
+import logoWhite from "./assets/logo-white.svg";
+import facebook from "./assets/icon-facebook.svg";
+import youtube from "./assets/icon-youtube.svg";
+import twitter from "./assets/icon-twitter.svg";
+import pinterest from "./assets/icon-pinterest.svg";
+import instagram from "./assets/icon-instagram.svg";
 
 function App() {
   return (
@@ -178,8 +184,7 @@ function App() {
 
           <div className="flex flex-col mt-24 md:flex-row md:space-x-6">
             <div className="flex flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:w-1/3">
-              <img src="img/avatar-anisha.png" className="w-16 -mt-14" alt="" />
-              <h5 className="text-lg font-bold">Anisha Li</h5>
+              <h5 className="text-lg font-bold">Anisha</h5>
               <p className="text-sm text-darkGrayishBlue">
                 “Listed has supercharged our team’s workflow. The ability to
                 maintain visibility on larger milestones at all times keeps
@@ -188,8 +193,7 @@ function App() {
             </div>
 
             <div className="hidden flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:flex md:w-1/3">
-              <img src="img/avatar-ali.png" className="w-16 -mt-14" alt="" />
-              <h5 className="text-lg font-bold">Ali Bravo</h5>
+              <h5 className="text-lg font-bold">Rahul</h5>
               <p className="text-sm text-darkGrayishBlue">
                 “There is no more cross-channel confusion and everyone is much
                 more focused.”
@@ -197,12 +201,7 @@ function App() {
             </div>
 
             <div className="hidden flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:flex md:w-1/3">
-              <img
-                src="img/avatar-richard.png"
-                className="w-16 -mt-14"
-                alt=""
-              />
-              <h5 className="text-lg font-bold">Richard Watts</h5>
+              <h5 className="text-lg font-bold">Avinash</h5>
               <p className="text-sm text-darkGrayishBlue">
                 “Listed has supercharged our team’s workflow. The ability to
                 maintain visibility on larger milestones at all times keeps
@@ -242,32 +241,32 @@ function App() {
         <div className="container flex flex-col-reverse justify-between px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0">
           <div className="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:space-y-0 md:items-start">
             <div className="mx-auto my-6 text-center text-white md:hidden">
-              Copyright &copy; 2022, All Rights Reserved
+              Copyright &copy; 2023, All Rights Reserved
             </div>
 
             <div>
-              <img src="img/logo-white.svg" className="h-8" alt="" />
+              <img src={logoWhite} className="h-8" alt="" />
             </div>
 
             <div className="flex justify-center space-x-4">
               <a href="#">
-                <img src="img/icon-facebook.svg" alt="" className="h-8" />
+                <img src={facebook} alt="" className="h-8" />
               </a>
 
               <a href="#">
-                <img src="img/icon-youtube.svg" alt="" className="h-8" />
+                <img src={youtube} alt="" className="h-8" />
               </a>
 
               <a href="#">
-                <img src="img/icon-twitter.svg" alt="" className="h-8" />
+                <img src={twitter} alt="" className="h-8" />
               </a>
 
               <a href="#">
-                <img src="img/icon-pinterest.svg" alt="" className="h-8" />
+                <img src={pinterest} alt="" className="h-8" />
               </a>
 
               <a href="#">
-                <img src="img/icon-instagram.svg" alt="" className="h-8" />
+                <img src={instagram} alt="" className="h-8" />
               </a>
             </div>
           </div>
@@ -314,7 +313,7 @@ function App() {
               </div>
             </form>
             <div className="hidden text-white md:block">
-              Copyright &copy; 2022, All Rights Reserved
+              Copyright &copy; 2023, All Rights Reserved
             </div>
           </div>
         </div>
