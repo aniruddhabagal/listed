@@ -8,6 +8,17 @@ import twitter from "./assets/icon-twitter.svg";
 import pinterest from "./assets/icon-pinterest.svg";
 import instagram from "./assets/icon-instagram.svg";
 
+function crossBtn() {
+  const btn = document.getElementById("menu-btn");
+  const nav = document.getElementById("menu");
+
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("open");
+    nav.classList.toggle("flex");
+    nav.classList.toggle("hidden");
+  });
+}
+
 function App() {
   return (
     <>
@@ -41,6 +52,7 @@ function App() {
             Dashboard
           </a>
           <button
+            onClick={crossBtn}
             id="menu-btn"
             className="block hamburger md:hidden focus:outline-none"
           >
@@ -78,7 +90,7 @@ function App() {
                 href="#"
                 className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
               >
-                Get Started
+                Dashboard
               </a>
             </div>
           </div>
@@ -215,7 +227,7 @@ function App() {
               href="#"
               className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
             >
-              Get Started
+              Dashboard
             </a>
           </div>
         </div>
@@ -231,7 +243,7 @@ function App() {
               href="#"
               className="p-3 px-6 pt-2 text-brightRed bg-white rounded-full shadow-2xl baseline hover:bg-gray-900"
             >
-              Get Started
+              Dashboard
             </a>
           </div>
         </div>
