@@ -1,5 +1,4 @@
-import "../App.css";
-import illustrationIntro from "../assets/illustration-intro.svg";
+import illustrationIntro from "./assets/illustration-intro.svg";
 
 function Hero() {
   return (

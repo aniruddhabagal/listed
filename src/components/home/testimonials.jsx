@@ -1,5 +1,3 @@
-import "../App.css";
-
 function Testimonials() {
   return (
     <section id="testimonials">

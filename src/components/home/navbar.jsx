@@ -1,5 +1,4 @@
-import "../App.css";
-import logo from "../assets/listedDarklogo.svg";
+import logo from "./assets/listedDarklogo.svg";
 
 function crossBtn() {
   const btn = document.getElementById("menu-btn");
