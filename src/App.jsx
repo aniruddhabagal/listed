@@ -3,6 +3,7 @@ import Navbar from "./components/navbar";
 import Hero from "./components/hero";
 import Features from "./components/features";
 import Testimonials from "./components/testimonials";
+import CTA from "./components/cta";
 import logoWhite from "./assets/logo-white.svg";
 import facebook from "./assets/icon-facebook.svg";
 import youtube from "./assets/icon-youtube.svg";
@@ -17,23 +18,7 @@ function App() {
       <Hero />
       <Features />
       <Testimonials />
-
-      <section id="cta" className="bg-brightRed">
-        <div className="container flex flex-col items-center justify-between px-6 py-24 mx-auto space-y-12 md:py-12 md:flex-row md:space-y-0">
-          <h2 className="text-5xl font-bold text-center text-white md:text-4xl md:max-w-xl md:text-left">
-            Simplify how your team works today
-          </h2>
-
-          <div>
-            <a
-              href="#"
-              className="p-3 px-6 pt-2 text-brightRed bg-white rounded-full shadow-2xl baseline hover:bg-gray-900"
-            >
-              Dashboard
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTA />
 
       <footer className="bg-veryDarkBlue">
         <div className="container flex flex-col-reverse justify-between px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0">
