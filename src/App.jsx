@@ -257,7 +257,7 @@ function App() {
             </div>
 
             <div>
-              <img src={logoWhite} className="h-8" alt="" />
+              <img src={logoWhite} className="h-15 w-28" alt="" />
             </div>
 
             <div className="flex justify-center space-x-4">
