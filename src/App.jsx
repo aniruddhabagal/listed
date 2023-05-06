@@ -64,8 +64,8 @@ function App() {
               Bring everyone together to build better products
             </h1>
             <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-              Manage makes it simple for software teams to plan day-to-day tasks
-              while keeping the larger team goals in view.
+              Listed makes it simple for Creators to manage links and plan
+              day-to-day tasks while keeping the larger goals in view.
             </p>
             <div className="flex justify-center md:justify-start">
               <a
@@ -86,12 +86,11 @@ function App() {
         <div className="container flex flex-col px-4 mx-auto mt-10 space-y-12 md:space-y-0 md:flex-row">
           <div className="flex flex-col space-y-12 md:w-1/2">
             <h2 className="max-w-md text-4xl font-bold text-center md:text-left">
-              What{"'"}s different about Manage?
+              What{"'"}s different about Listed?
             </h2>
             <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-              Manage provides all the functionality your team needs, without the
-              complexity. Our software is tailor-made for modern digital product
-              teams.
+              Listed provides all the functionality Creator needs, without the
+              complexity. Our software is tailor-made for modern age Creators.
             </p>
           </div>
 
@@ -182,7 +181,7 @@ function App() {
               <img src="img/avatar-anisha.png" className="w-16 -mt-14" alt="" />
               <h5 className="text-lg font-bold">Anisha Li</h5>
               <p className="text-sm text-darkGrayishBlue">
-                “Manage has supercharged our team’s workflow. The ability to
+                “Listed has supercharged our team’s workflow. The ability to
                 maintain visibility on larger milestones at all times keeps
                 everyone motivated.”
               </p>
@@ -192,9 +191,8 @@ function App() {
               <img src="img/avatar-ali.png" className="w-16 -mt-14" alt="" />
               <h5 className="text-lg font-bold">Ali Bravo</h5>
               <p className="text-sm text-darkGrayishBlue">
-                “We have been able to cancel so many other subscriptions since
-                using Manage. There is no more cross-channel confusion and
-                everyone is much more focused.”
+                “There is no more cross-channel confusion and everyone is much
+                more focused.”
               </p>
             </div>
 
@@ -206,7 +204,7 @@ function App() {
               />
               <h5 className="text-lg font-bold">Richard Watts</h5>
               <p className="text-sm text-darkGrayishBlue">
-                “Manage has supercharged our team’s workflow. The ability to
+                “Listed has supercharged our team’s workflow. The ability to
                 maintain visibility on larger milestones at all times keeps
                 everyone motivated.”
               </p>
@@ -217,6 +215,22 @@ function App() {
             <a
               href="#"
               className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+            >
+              Get Started
+            </a>
+          </div>
+        </div>
+      </section>
+      <section id="cta" className="bg-brightRed">
+        <div className="container flex flex-col items-center justify-between px-6 py-24 mx-auto space-y-12 md:py-12 md:flex-row md:space-y-0">
+          <h2 className="text-5xl font-bold text-center text-white md:text-4xl md:max-w-xl md:text-left">
+            Simplify how your team works today
+          </h2>
+
+          <div>
+            <a
+              href="#"
+              className="p-3 px-6 pt-2 text-brightRed bg-white rounded-full shadow-2xl baseline hover:bg-gray-900"
             >
               Get Started
             </a>
