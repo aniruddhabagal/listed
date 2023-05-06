@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-tailwind-landing-page
+
 
 # Editor directories and files
 .vscode/*
