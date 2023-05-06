@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
@@ -16,16 +16,21 @@ const defaultFormFields = {
 const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
+    resetFormFields();
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
   };
 
+  const navigateToDash = () => {
+    navigate("/dashboard");
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -36,6 +41,7 @@ const Login = () => {
       );
       console.log(response);
       resetFormFields();
+      navigateToDash();
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
@@ -43,6 +49,9 @@ const Login = () => {
           break;
         case "auth/user-not-found":
           alert("no user associated with this email");
+          break;
+        case "auth/invalid-email":
+          alert("Invalid E-Mail");
           break;
         default:
           console.log(error);
