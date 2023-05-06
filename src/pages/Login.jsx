@@ -1,93 +1,159 @@
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../firebase";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Dashboard from "./dashboard";
+import { useState } from "react";
+
+import {
+  signInWithGooglePopup,
+  createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword,
+} from "../firebase";
+
+// import "./sign-in-form.styles.scss";
+
+const defaultFormFields = {
+  email: "",
+  password: "",
+};
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { email, password } = formFields;
 
-  const onLogin = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        navigate("/dashboard");
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
   };
 
-  const [value, setValue] = useState("");
-  const handleClick = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
-    });
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    await createUserDocumentFromAuth(user);
   };
 
-  useEffect(() => {
-    setValue(localStorage.getItem("email"));
-  });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(response);
+      resetFormFields();
+    } catch (error) {
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("incorrect password for email");
+          break;
+        case "auth/user-not-found":
+          alert("no user associated with this email");
+          break;
+        default:
+          console.log(error);
+      }
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormFields({ ...formFields, [name]: value });
+  };
 
   return (
-    <>
-      <main>
-        <section>
-          <div>
-            <p> Listed </p>
+    // <div className="sign-up-container">
+    //   <h2>Already have an account?</h2>
+    //   <span>Sign in with your email and password</span>
+    //   <form onSubmit={handleSubmit}>
+    //     <FormInput
+    //       label="Email"
+    //       type="email"
+    //       required
+    //       onChange={handleChange}
+    //       name="email"
+    //       value={email}
+    //     />
 
-            <form>
-              <div>
-                <label htmlFor="email-address">Email address</label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+    //     <FormInput
+    //       label="Password"
+    //       type="password"
+    //       required
+    //       onChange={handleChange}
+    //       name="password"
+    //       value={password}
+    //     />
+    //     <div className="buttons-container">
+    //       <Button type="submit">Sign In</Button>
+    //       <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+    //         Google sign in
+    //       </Button>
+    //     </div>
+    //   </form>
+    // </div>
 
-              <div>
-                <label htmlFor="password">Password</label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full">
+      <div className="hidden sm:block text-white md:w-[70%] bg-black font-bold text-7xl md:leading-[88px] ">
+        <div className="text-center align-middle mt-[300px] p-auto mr-10">
+          Board.
+        </div>
+      </div>
+      <div className="md:hidden sm:hidden bg-black font-bold text-7xl align-middle text-white pt-5 p-auto mb-[30px] ">
+        <div className="text-center align-middle pt-[60px]">Board.</div>
+      </div>
 
-              <div>
-                <button onClick={onLogin}>Login</button>
-              </div>
-              <div>
-                {value ? (
-                  <Dashboard />
-                ) : (
-                  <button onClick={handleClick}>Signin With Google</button>
-                )}
-              </div>
-            </form>
-
-            <p className="text-sm text-white text-center">
-              No account yet? <NavLink to="/signup">Sign up</NavLink>
-            </p>
+      <div className="bg-[#F5F5F5] flex flex-col justify-center md:ml-[-220px] ">
+        <h2 className="text-3xl dark:text-black font-bold text-center">
+          SIGN IN
+        </h2>
+        <h5 className=" dark:text-black text-center mb-5 ">
+          Sign in to your account
+        </h5>
+        <form className="max-w-[400px] w-full mx-auto rounded-lg bg-white p-8 px-8">
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>Username</label>
+            <input
+              className="rounded-lg bg-[#F5F5F5] mt-2 p-2  focus:bg-gray-800 focus:outline-none"
+              type="text"
+              required
+              onChange={handleChange}
+              name="email"
+              value={email}
+            />
           </div>
-        </section>
-      </main>
-    </>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>Password</label>
+            <input
+              className="p-2 rounded-lg bg-[#F5F5F5] mt-2  focus:bg-gray-800 focus:outline-none"
+              type="password"
+              required
+              onChange={handleChange}
+              name="password"
+              value={password}
+            />
+          </div>
+          <div className="flex justify-between text-gray-400 py-2">
+            <p className="flex items-center">
+              <input className="mr-2" type="checkbox" /> Remember Me
+            </p>
+            <p className="text-[#346BD4] cursor-pointer">Forgot Password?</p>
+          </div>
+          <button
+            className="w-full my-5 py-2 bg-black shadow-lg shadow-black-500/50 hover:shadow-black -500/40 text-white font-semibold rounded-lg"
+            onClick={handleSubmit}
+          >
+            SIGNIN
+          </button>
+          <button
+            className="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150 mx-auto"
+            onClick={signInWithGoogle}
+          >
+            <img
+              className="w-6 h-6"
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              loading="lazy"
+              alt="google logo"
+            />
+            <span>Login with Google</span>
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

@@ -8,6 +8,14 @@ export default {
       lg: "976px",
       xl: "1440px",
     },
+    fontFamily: {
+      sans: ["ui-sans-serif", "system-ui"],
+      serif: ["ui-serif", "Georgia"],
+      mono: ["ui-monospace", "SFMono-Regular"],
+      display: ["Oswald"],
+      body: ["Open Sans"],
+      Mont: ["Montserrat"],
+    },
     extend: {
       colors: {
         brightRed: "hsl(12, 88%, 59%)",
