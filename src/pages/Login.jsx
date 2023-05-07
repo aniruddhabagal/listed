@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+// import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ function Login() {
 
   useEffect(() => {
     if (loading) {
+      // maybe trigger a loading screen
       return;
     }
     if (user) navigate("/dashboard");
@@ -41,9 +43,10 @@ function Login() {
               className="rounded-lg bg-[#F5F5F5] mt-2 p-2  focus:bg-gray-800 focus:outline-none"
               type="text"
               required
-              // onChange={handleChange}
-              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+              // name="email"
               value={email}
+              placeholder="E-mail Address"
             />
           </div>
           <div className="flex flex-col text-gray-400 py-2">
@@ -52,9 +55,10 @@ function Login() {
               className="p-2 rounded-lg bg-[#F5F5F5] mt-2  focus:bg-gray-800 focus:outline-none"
               type="password"
               required
-              // onChange={handleChange}
-              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              // name="password"
               value={password}
+              placeholder="Min 6 Digits"
             />
           </div>
           <div className="flex justify-between text-gray-400 py-2">
@@ -65,7 +69,8 @@ function Login() {
           </div>
           <button
             className="w-full my-5 py-2 bg-black shadow-lg shadow-black-500/50 hover:shadow-black -500/40 text-white font-semibold rounded-lg"
-            onClick={() => logInWithEmailAndPassword(email, password)}
+            // onClick={() => logInWithEmailAndPassword(email, password)}
+            onClick={signInWithGoogle}
           >
             SIGNIN
           </button>
