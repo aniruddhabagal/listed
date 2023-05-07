@@ -1,106 +1,21 @@
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import {
-//   getAuth,
-//   GoogleAuthProvider,
-//   signInWithRedirect,
-//   signInWithPopup,
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-// } from "firebase/auth";
-
-// import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-// // TODO: Add SDKs for Firebase products that you want to use
-// // https://firebase.google.com/docs/web/setup#available-libraries
-
-// // Your web app's Firebase configuration
-// // const firebaseConfig = {
-// //   apiKey: "AIzaSyBL46VC7RcawrwvzjQ3Dgd4rmQAe073ONc",
-// //   authDomain: "listed-09.firebaseapp.com",
-// //   projectId: "listed-09",
-// //   storageBucket: "listed-09.appspot.com",
-// //   messagingSenderId: "462460702830",
-// //   appId: "1:462460702830:web:5cb3cebb798bbae6e5967f",
-// //   measurementId: "G-M8ERVRW77M",
-// // };
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBynUWpcQtAU3mUvR9nhO3WBVA3KiJD1ps",
-//   authDomain: "listed-2.firebaseapp.com",
-//   projectId: "listed-2",
-//   storageBucket: "listed-2.appspot.com",
-//   messagingSenderId: "926102154901",
-//   appId: "1:926102154901:web:8311a4931287b9ee8d359c",
-// };
-// // Initialize Firebase
-
-// const firebaseApp = initializeApp(firebaseConfig);
-
-// const googleProvider = new GoogleAuthProvider();
-
-// googleProvider.setCustomParameters({
-//   prompt: "select_account",
-// });
-
-// export const auth = getAuth();
-// export const signInWithGooglePopup = () =>
-//   signInWithPopup(auth, googleProvider);
-// export const signInWithGoogleRedirect = () =>
-//   signInWithRedirect(auth, googleProvider);
-
-// export const db = getFirestore();
-
-// export const createUserDocumentFromAuth = async (
-//   userAuth,
-//   additionalInformation = {}
-// ) => {
-//   if (!userAuth) return;
-
-//   const userDocRef = doc(db, "users", userAuth.uid);
-
-//   const userSnapshot = await getDoc(userDocRef);
-
-//   if (!userSnapshot.exists()) {
-//     const { displayName, email } = userAuth;
-//     const createdAt = new Date();
-
-//     try {
-//       await setDoc(userDocRef, {
-//         displayName,
-//         email,
-//         createdAt,
-//         ...additionalInformation,
-//       });
-//     } catch (error) {
-//       console.log("error creating the user", error.message);
-//     }
-//   }
-
-//   return userDocRef;
-// };
-
-// export const createAuthUserWithEmailAndPassword = async (email, password) => {
-//   if (!email || !password) return;
-
-//   return await createUserWithEmailAndPassword(auth, email, password);
-// };
-
-// export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-//   if (!email || !password) return;
-
-//   return await signInWithEmailAndPassword(auth, email, password);
-// };
 import { initializeApp } from "firebase/app";
 import {
-  getAuth,
-  signInWithRedirect,
-  signInWithPopup,
   GoogleAuthProvider,
-  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithPopup,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signOut,
-  onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBynUWpcQtAU3mUvR9nhO3WBVA3KiJD1ps",
@@ -111,64 +26,77 @@ const firebaseConfig = {
   appId: "1:926102154901:web:8311a4931287b9ee8d359c",
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
 
-googleProvider.setCustomParameters({
-  prompt: "select_account",
-});
-
-export const auth = getAuth();
-export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () =>
-  signInWithRedirect(auth, googleProvider);
-
-export const db = getFirestore();
-
-export const createUserDocumentFromAuth = async (
-  userAuth,
-  additionalInformation = {}
-) => {
-  if (!userAuth) return;
-
-  const userDocRef = doc(db, "users", userAuth.uid);
-
-  const userSnapshot = await getDoc(userDocRef);
-
-  if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
-    const createdAt = new Date();
-
-    try {
-      await setDoc(userDocRef, {
-        displayName,
-        email,
-        createdAt,
-        ...additionalInformation,
+const signInWithGoogle = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider);
+    const user = res.user;
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const docs = await getDocs(q);
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "google",
+        email: user.email,
       });
-    } catch (error) {
-      console.log("error creating the user", error.message);
     }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
   }
-
-  return userDocRef;
 };
 
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return;
-
-  return await createUserWithEmailAndPassword(auth, email, password);
+const logInWithEmailAndPassword = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
 };
 
-export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return;
-
-  return await signInWithEmailAndPassword(auth, email, password);
+const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+    await addDoc(collection(db, "users"), {
+      uid: user.uid,
+      name,
+      authProvider: "local",
+      email,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
 };
 
-export const signOutUser = async () => await signOut(auth);
+const sendPasswordReset = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset link sent!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
 
-export const onAuthStateChangedListener = (callback) =>
-  onAuthStateChanged(auth, callback);
+const logout = () => {
+  signOut(auth);
+};
+
+export {
+  auth,
+  db,
+  signInWithGoogle,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  sendPasswordReset,
+  logout,
+};

@@ -64,74 +64,28 @@
 
 //     setFormFields({ ...formFields, [name]: value });
 //   };
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-// import FormInput from '../form-input/form-input.component';
-// import Button from '../button/button.component';
-
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  signInWithGooglePopup,
-  createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword,
-} from "../firebase";
+  auth,
+  logInWithEmailAndPassword,
+  signInWithGoogle,
+} from "../firebase.t";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-// import './sign-in-form.styles.scss';
-
-const defaultFormFields = {
-  email: "",
-  password: "",
-};
-
-const Login = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password } = formFields;
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
-  };
 
-  const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
-  };
-  const navigateToDashboard = () => {
-    navigate("/dashboard");
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log(response);
-      resetFormFields();
-      navigateToDashboard("/dashboard");
-    } catch (error) {
-      switch (error.code) {
-        case "auth/invalid-email":
-          alert("Invalid Email");
-          break;
-        case "auth/wrong-password":
-          alert("incorrect password for email");
-          break;
-        case "auth/user-not-found":
-          alert("no user associated with this email");
-          break;
-        default:
-          console.log(error);
-      }
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
     }
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormFields({ ...formFields, [name]: value });
-  };
+    if (user) navigate("/dashboard");
+  }, [user, loading]);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full">
@@ -158,7 +112,7 @@ const Login = () => {
               className="rounded-lg bg-[#F5F5F5] mt-2 p-2  focus:bg-gray-800 focus:outline-none"
               type="text"
               required
-              onChange={handleChange}
+              // onChange={handleChange}
               name="email"
               value={email}
             />
@@ -169,7 +123,7 @@ const Login = () => {
               className="p-2 rounded-lg bg-[#F5F5F5] mt-2  focus:bg-gray-800 focus:outline-none"
               type="password"
               required
-              onChange={handleChange}
+              // onChange={handleChange}
               name="password"
               value={password}
             />
@@ -182,7 +136,7 @@ const Login = () => {
           </div>
           <button
             className="w-full my-5 py-2 bg-black shadow-lg shadow-black-500/50 hover:shadow-black -500/40 text-white font-semibold rounded-lg"
-            onClick={handleSubmit}
+            onClick={() => logInWithEmailAndPassword(email, password)}
           >
             SIGNIN
           </button>
@@ -202,6 +156,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;
