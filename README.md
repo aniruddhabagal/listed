@@ -15,30 +15,36 @@ Use the package manager `npm` to install Listed.
 
 ![](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
 
-Clone the project
+- Clone the project
 
 ```bash
   git clone https://github.com/aniruddhabagal/listed.git
 ```
 
-change directory
+- Change directory
 
 ```bash
   cd listed
 ```
 
-Install dependencies
+- Install dependencies
 
 ```bash
   npm install
 ```
 
-Start the server
+- Start the server
 
 ```bash
   npm run dev
 ```
 
 <hr />
+
+### 🔑 Dummy Login Creds
+1. Username: `abc@abc.com` <br>
+   Password: `user1234` 
+2. Username: `listed` <br>
+   Password: `listed1234` 
 
 
