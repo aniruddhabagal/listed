@@ -1,4 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 function CTA() {
+  const navigate = useNavigate();
+  const navigateToLogin = () => {
+    navigate("/login");
+  };
   return (
     <>
       <section id="cta" className="bg-brightRed">
@@ -9,8 +15,8 @@ function CTA() {
 
           <div>
             <a
-              href="#"
-              className="p-3 px-6 pt-2 text-brightRed bg-white rounded-full shadow-2xl baseline hover:bg-gray-900"
+              className="p-3 px-6 pt-2 text-brightRed bg-white rounded-full shadow-2xl baseline hover:bg-gray-900 cursor-pointer"
+              onClick={navigateToLogin}
             >
               Dashboard
             </a>

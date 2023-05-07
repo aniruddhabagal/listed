@@ -1,6 +1,11 @@
 import illustrationIntro from "./assets/illustration-intro.svg";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+  const navigate = useNavigate();
+  const navigateToLogin = () => {
+    navigate("/login");
+  };
   return (
     <>
       <section id="hero">
@@ -15,8 +20,8 @@ function Hero() {
             </p>
             <div className="flex justify-center md:justify-start">
               <a
-                href="#"
-                className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+                className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight cursor-pointer"
+                onClick={navigateToLogin}
               >
                 Dashboard
               </a>

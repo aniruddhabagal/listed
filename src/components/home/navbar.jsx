@@ -1,4 +1,5 @@
 import logo from "./assets/listedDarklogo.svg";
+import { useNavigate } from "react-router-dom";
 
 function crossBtn() {
   const btn = document.getElementById("menu-btn");
@@ -12,6 +13,10 @@ function crossBtn() {
 }
 
 function Navbar() {
+  const navigate = useNavigate();
+  const navigateToLogin = () => {
+    navigate("/login");
+  };
   return (
     <>
       <nav className="relative container mx-auto p-6">
@@ -38,8 +43,8 @@ function Navbar() {
           </div>
 
           <a
-            href="#"
-            className="hidden p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight md:block"
+            className="hidden p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight md:block cursor-pointer"
+            onClick={navigateToLogin}
           >
             Dashboard
           </a>
