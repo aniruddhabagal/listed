@@ -11,23 +11,21 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<Dashboard />} />
-        </Route>
-        <Route path="transactions">
-          <Route index element={<List />} />
-          <Route path="transactions" element={<Transactions />} />
-        </Route>
-        {/* <Route path="/check" element={<SignInForm />} /> */}
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />}>
+        <Route index element={<Dashboard />} />
+      </Route>
+      <Route path="transactions">
+        <Route index element={<List />} />
+        <Route path="transactions" element={<Transactions />} />
+      </Route>
+      {/* <Route path="/check" element={<SignInForm />} /> */}
 
-        {/* <Route path="/check" element={<Check />} /> */}
-      </Routes>
-    </Router>
+      {/* <Route path="/check" element={<Check />} /> */}
+    </Routes>
   );
 }
 
