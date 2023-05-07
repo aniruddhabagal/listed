@@ -65,6 +65,7 @@
 //     setFormFields({ ...formFields, [name]: value });
 //   };
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // import FormInput from '../form-input/form-input.component';
 // import Button from '../button/button.component';
@@ -94,8 +95,12 @@ const Login = () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
   };
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
+    const navigateToDashboard = () => {
+      navigate("/dashboard");
+    };
     event.preventDefault();
 
     try {
@@ -105,8 +110,12 @@ const Login = () => {
       );
       console.log(response);
       resetFormFields();
+      navigateToDashboard("/dashboard");
     } catch (error) {
       switch (error.code) {
+        case "auth/invalid-email":
+          alert("Invalid Email");
+          break;
         case "auth/wrong-password":
           alert("incorrect password for email");
           break;
