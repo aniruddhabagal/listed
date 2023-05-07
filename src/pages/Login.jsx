@@ -1,76 +1,6 @@
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import {
-//   signInWithGooglePopup,
-//   createUserDocumentFromAuth,
-//   signInAuthUserWithEmailAndPassword,
-// } from "../firebase";
-
-// // import "./sign-in-form.styles.scss";
-
-// const defaultFormFields = {
-//   email: "",
-//   password: "",
-// };
-
-// const Login = () => {
-//   const [formFields, setFormFields] = useState(defaultFormFields);
-//   const { email, password } = formFields;
-//   const navigate = useNavigate();
-
-//   const resetFormFields = () => {
-//     setFormFields(defaultFormFields);
-//   };
-
-//   const signInWithGoogle = async () => {
-//     resetFormFields();
-//     const { user } = await signInWithGooglePopup();
-//     await createUserDocumentFromAuth(user);
-//   };
-
-//   const navigateToDash = () => {
-//     navigate("/dashboard");
-//   };
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     try {
-//       const response = await signInAuthUserWithEmailAndPassword(
-//         email,
-//         password
-//       );
-//       console.log(response);
-//       resetFormFields();
-//       navigateToDash();
-//     } catch (error) {
-//       switch (error.code) {
-//         case "auth/wrong-password":
-//           alert("incorrect password for email");
-//           break;
-//         case "auth/user-not-found":
-//           alert("no user associated with this email");
-//           break;
-//         case "auth/invalid-email":
-//           alert("Invalid E-Mail");
-//           break;
-//         default:
-//           console.log(error);
-//       }
-//     }
-//   };
-
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
-
-//     setFormFields({ ...formFields, [name]: value });
-//   };
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  auth,
-  logInWithEmailAndPassword,
-  signInWithGoogle,
-} from "../firebase.t";
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 function Login() {
@@ -81,7 +11,6 @@ function Login() {
 
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
     if (user) navigate("/dashboard");
