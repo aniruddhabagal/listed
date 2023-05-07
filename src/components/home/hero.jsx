@@ -23,7 +23,7 @@ function Hero() {
                 className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight cursor-pointer"
                 onClick={navigateToLogin}
               >
-                Dashboard
+                Login
               </a>
             </div>
           </div>

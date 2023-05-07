@@ -86,7 +86,7 @@ const defaultFormFields = {
 const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
+  const navigate = useNavigate();
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -95,12 +95,11 @@ const Login = () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
   };
-  const navigate = useNavigate();
+  const navigateToDashboard = () => {
+    navigate("/dashboard");
+  };
 
   const handleSubmit = async (event) => {
-    const navigateToDashboard = () => {
-      navigate("/dashboard");
-    };
     event.preventDefault();
 
     try {

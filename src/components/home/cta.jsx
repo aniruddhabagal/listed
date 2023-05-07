@@ -18,7 +18,7 @@ function CTA() {
               className="p-3 px-6 pt-2 text-brightRed bg-white rounded-full shadow-2xl baseline hover:bg-gray-900 cursor-pointer"
               onClick={navigateToLogin}
             >
-              Dashboard
+              Login
             </a>
           </div>
         </div>
