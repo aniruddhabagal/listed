@@ -53,7 +53,7 @@ const List = () => {
       id: 2342355,
       product: "ASUS ROG Strix",
       img: "https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "Munnavar Faruqee",
+      customer: "Munawar Faruqui",
       date: "1 March",
       amount: 2000,
       method: "Online",
