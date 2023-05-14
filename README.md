@@ -44,7 +44,7 @@ Use the package manager `npm` to install Listed.
 ### 🔑 Dummy Login Creds
 1. Username: `abc@abc.com` <br>
    Password: `user1234` 
-2. Username: `listed` <br>
+2. Username: `listed@abc.com` <br>
    Password: `listed1234` 
 <hr />
 
