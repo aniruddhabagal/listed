@@ -48,5 +48,5 @@ Use the package manager `npm` to install Listed.
    Password: `listed1234` 
 <hr />
 
-### Work in Progress - Making Charts Responsive
+
 
